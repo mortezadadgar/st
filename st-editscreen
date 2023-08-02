@@ -1,0 +1,9 @@
+#!/bin/sh
+# Description: Open current scrollback in editor
+# Shell: POSIX compliant
+set -eu
+
+tmpfile=$(mktemp /tmp/st-edit.XXXXXX)
+trap 'rm "$tmpfile"' TERM INT EXIT
+cat > "$tmpfile"
+st -e "$EDITOR" "$tmpfile"
